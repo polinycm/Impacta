@@ -1,0 +1,121 @@
+﻿@model IEnumerable<EPT.Models.Atestado>
+
+@{
+    ViewData["Title"] = "Atestado2";
+}
+<div class="col-12">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+
+<br />
+<div class="alterar">
+    <h4>Filtros</h4>
+</div>
+<hr />
+
+<form method="get">
+
+    <div class="row">
+        <div class="form-group col-2 ">
+            <label class="control-label mb-2" style="font-size:17px;" for="">Intervalo de Data:</label>
+            
+            <div class="form-group ">
+                 <input class="form-control" style=" font-size:15px;" type="date" name="dt_inicio" id="dt_inicio">
+
+            </div>
+        </div>
+        
+        <div class="form-group col-2 ">
+            <label class="control-label" style="font-size:17px;margin-top:21px;" for=""> </label>
+            
+            <input class="form-control mt-2" style="font-size:15px;" type="date" name="dt_fim" id="dt_fim">
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label mb-2" style="font-size:17px;" for="valor">Valor:</label>
+            <input class="form-control" style="font-size:15px;" type="text" name="valor" id="valor">
+
+        </div>
+        
+    </div>
+  
+
+    <div class="form-group mt-2 mb-2">
+        <label class="control-label mb-2" style="font-size:17px;" for="objeto">Objeto:</label>
+        <input class="form-control" style=" font-size:15px;" type="text" name="objeto" id="objeto">
+    </div>
+
+
+
+    <div class="form-group mb-2">
+        <label class="control-label mb-2" style="font-size:17px;" for="descricao">Descricao:</label>
+        <input class="form-control" style="font-size:15px;" type="text" name="descricao" id="descricao">
+    </div>
+    <br />
+  
+    <div class="form-group mb-3">
+        <button class="btn btn-success" type="submit">Filtrar</button> 
+
+    </div>
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2" style="font-size:17px">
+               Id Atestado
+            </th>
+            <th class="col-2" style="font-size:17px">
+                Data Inicio
+            </th>
+            <th class="col-2" style="font-size:17px">
+                Data Fim
+            </th>
+            <th class="col-2" style="font-size:17px">
+                @Html.DisplayNameFor(model => model.valor)
+            </th>
+            <th class="col-2" style="font-size:17px">
+                @Html.DisplayNameFor(model => model.objeto)
+            </th>
+            <th class="col-2" style="font-size:17px">
+                Contratante
+            </th>
+            <th class="col-2" style="font-size:17px">
+                Descrição
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtestadoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dt_inicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dt_fim)
+            </td>
+            <td>
+                R$ @Html.DisplayFor(modelItem => item.valor)
+            </td>
+            <td class="max-width-200">
+                @Html.DisplayFor(modelItem => item.objeto)
+            </td>
+            <td class="max-width-200">
+                @Html.DisplayFor(modelItem => item.Contratante.contratante)
+            </td>
+            <td class="max-width-200">
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

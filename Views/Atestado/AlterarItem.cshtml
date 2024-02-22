@@ -1,0 +1,49 @@
+﻿@model EPT.Models.AtestadoItem
+
+@{
+    ViewData["Title"] = "AlterarItem";
+}
+<div class="col-1 mb-4">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+
+
+<div class="row alterar">
+    <div class="col-md-4">
+        <form asp-action="AlterarItem">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.AtestadoId)
+
+        
+
+
+            <div class="form-group">
+                <label asp-for="unidade" class="control-label mb-2">Unidade:</label>
+                <input asp-for="unidade" class="form-control mb-2" />
+                <span asp-validation-for="unidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="quantidade" class="control-label mb-2">Quantidade:</label>
+                <input asp-for="quantidade" class="form-control" />
+                <span asp-validation-for="quantidade" class="text-danger"></span>
+            </div>
+           <br />
+            <div class="form-group">
+                <input asp-route-atestadoItemId="@Model.AtestadoItemId" type="submit" value="Confirmar" class="btn btn-success" /> |
+
+                <a href="@Url.Action("IncluirItem", new { idatestado = Model.AtestadoId })" class="btn btn-danger">Voltar</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

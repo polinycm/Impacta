@@ -1,0 +1,52 @@
+﻿@model EPT.Models.Funcoes
+
+@{
+    ViewData["Title"] = "Excluir";
+}
+
+<div class="col-1 mb-4">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+
+<div class="alterar">
+    <h3>Confirmar exclusão desta função? </h3>
+
+</div>
+
+
+<div class="alterar">
+    <hr />
+    <br />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            ID
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FuncoesId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcao)
+        </dd>
+    </dl>
+    <br />
+    <div class="row">
+        <div  style="margin-right:5px">
+            <form asp-action="Excluir">
+                <input asp-route-funcaoId="@Model.FuncoesId" type="submit" value="Confirmar" class="btn btn-success" /> |
+                <a href="@Url.Action("Index")" class="btn btn-danger">Voltar</a>
+
+            </form>
+
+        </div>
+       
+
+    </div>
+
+</div>

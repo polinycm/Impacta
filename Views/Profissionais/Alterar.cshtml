@@ -1,0 +1,39 @@
+﻿@model EPT.Models.Profissionais
+
+@{
+    ViewData["Title"] = "Alterar";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Alterar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-1 mb-4 ">
+                <nav class="navbar navbar-expand-lg">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                </nav>
+            </div>
+            <div class="alterar">
+                <div class="form-group mb-2">
+                    <label asp-for="Nome" class="control-label mb-2"></label>
+                    <input asp-for="Nome" class="form-control mb-2" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input asp-route-idprofissional="@Model.ProfissionaisId" type="submit" value="Salvar" class="btn btn-success" /> |
+                    <button class="btn btn-danger " onclick="location.href='@Url.Action("Index")'">Voltar</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

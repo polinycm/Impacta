@@ -1,0 +1,29 @@
+﻿@model EPT.Models.SubItens
+
+@{
+    ViewData["Title"] = "Alterar";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Alterar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="SubItem" class="control-label mb-2"></label>
+                <input asp-for="SubItem" class="form-control" />
+                <span asp-validation-for="SubItem" class="text-danger"></span>
+            </div>
+            
+            <input type="hidden" name="ItensId" value="@Model.ItensId" />
+
+            <div class="form-group">
+                <input asp-route-subitemId="@Model.SubItensId" type="submit" value="Salvar" class="btn btn-success" /> |
+                <a href="@Url.Action("Index","SubItens", new{itemId=@Model.ItensId})" class="btn btn-danger">Voltar</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+

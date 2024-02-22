@@ -1,0 +1,37 @@
+﻿@model EPT.Models.Contratante
+
+@{
+    ViewData["Title"] = "Alterar";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Alterar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-1 mb-4 ">
+                <nav class="navbar navbar-expand-lg">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                </nav>
+            </div>
+            <div class="alterar">
+                <div class="form-group mb-2">
+                    <label asp-for="contratante" class="control-label mb-2"></label>
+                    <input asp-for="contratante" class="form-control mb-2" />
+                    <span asp-validation-for="contratante" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input asp-route-contratanteId="@Model.ContratanteId" type="submit" value="Salvar" class="btn btn-success" /> |
+                    <a href="@Url.Action("Index")" class="btn btn-danger">Voltar</a>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

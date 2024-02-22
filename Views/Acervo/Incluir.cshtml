@@ -1,0 +1,116 @@
+﻿@model EPT.ViewModels.AcervoViewModel
+
+@{
+    ViewData["Title"] = "Incluir";
+}
+
+<div class="col-12">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+<br />
+
+<form asp-action="Incluir">
+    <div class="alterar">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group col-2">
+                <label asp-for="numero_acervo" class="control-label mb-2">Acervo nº</label>
+                <input asp-for="numero_acervo" class="form-control mb-2" />
+                <span asp-validation-for="numero_acervo" class="text-danger"></span>
+            </div>
+            <div class="form-group col-2">
+                <label asp-for="numero_ept" class="control-label mb-2">EPT n°</label>
+                <input asp-for="numero_ept" class="form-control mb-2" />
+                <span asp-validation-for="numero_ept" class="text-danger"></span>
+            </div>
+            <div class="form-group col-2">
+                <label class="mb-2" for="itemSelect">ID Atestado:</label>
+                <select id="itemSelect" name="selectedAtestadoId" class="form-control mb-2" asp-for="Atestados.AtestadoId" asp-items="ViewBag.Atestado">
+                    @if (Model.SelectedAtestadoId!=0)
+                    {
+                        <option value="@Model.SelectedAtestadoId">@Model.SelectedAtestadoId</option>
+
+                    }
+                    else
+                    {
+                        <option value="">Selecione...</option>
+
+                    }
+                </select>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger" style="border:none; background:none; padding:0; color:red">@ViewBag.ErrorMessage</div>
+                }
+
+            </div>
+       
+     
+            <div class="form-group mb-2 col-2">
+                <label asp-for="dt_inicio" class="control-label mb-2">Data Inicio</label>
+                <input asp-for="dt_inicio" class="form-control" type="date"  />
+                <span asp-validation-for="dt_inicio" class="text-danger"></span>
+            </div>
+               
+            <div class="form-group mb-2 col-2">
+                <label asp-for="dt_fim" class="control-label mb-2">Data Fim</label>
+                <input asp-for="dt_fim" class="form-control" type="date" />
+                <span asp-validation-for="dt_fim" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="form-group col-3">
+                <label class="mb-2" for="itemSelect">Profissional:</label>
+                <select id="itemSelect" name="selectedProfissionaisId" class="form-control mb-2" asp-for="Profissional.ProfissionaisId" asp-items="ViewBag.Profissionais">
+                    <option value="">Selecione...</option>
+
+    @*                 <option value="SelectedProfissionaisId">Selecione...</option>
+     *@  
+                </select>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger" style="border:none; background:none; padding:0; color:red">@ViewBag.ErrorMessage</div>
+                }
+            </div>
+            <div class="form-group col-3">
+                <label class="mb-2" for="itemSelect">Função:</label>
+                <select id="itemSelect" name="selectedFuncoesId" class="form-control mb-2" asp-for="Funcao.FuncoesId" asp-items="ViewBag.Funcoes">
+                    <option value="">Selecione...</option>
+
+    @*                 <option value="SelectedFuncoesId">Selecione...</option>
+     *@           
+
+                </select>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger" style="border:none; background:none; padding:0; color:red">@ViewBag.ErrorMessage</div>
+                }
+            </div>
+
+       
+        </div>
+        <div class="form-group mb-2 col-6">
+            <label asp-for="Link" class="control-label mb-2">Link</label>
+            <input asp-for="Link" class="form-control" type="text" />
+            <span asp-validation-for="Link" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Salvar" class="btn btn-success" />|
+            <a href="@Url.Action("Index")" class="btn btn-danger">Voltar</a>
+
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

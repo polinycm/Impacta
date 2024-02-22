@@ -1,0 +1,42 @@
+﻿@model EPT.ViewModels.AlterarSenhaViewModel
+
+@{
+    ViewData["Title"] = "Alterar senha";
+}
+@Html.AntiForgeryToken()
+
+@using (Html.BeginForm("AlterarSenha", "Account", FormMethod.Post))
+
+
+{
+    <br />
+    <h4>
+        Alterar senha
+    </h4>
+    <hr />
+    <div >
+       
+        @Html.HiddenFor(model => model.UserId)
+        @Html.ValidationSummary()
+
+         <div class="form-group col-3">
+             <div class="mb-3">
+                    @Html.LabelFor(model => model.NovaSenha,"Nova Senha:", new { @class = "control-label" })
+             </div>
+            <div class="mb-3">
+
+                    @Html.PasswordFor(model => model.NovaSenha, new { @class = "form-control" })
+            </div>
+
+         </div>
+         <div>
+            
+                <input type="submit" value="Alterar" class="btn btn-success btn-sm" /> |
+                <button type="button" class="btn btn-danger btn-sm"onclick="location.href='@Url.Action("Index", "Home")'">Cancelar</button>
+
+            
+        </div>
+
+    </div>
+  
+}

@@ -1,0 +1,36 @@
+﻿@model EPT.Models.Itens
+
+@{
+    ViewData["Title"] = "Incluir";
+}
+<div class="col-1 mb-4">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+
+<div class="row alterar">
+    <div class="col-md-4">
+        <form asp-action="Incluir">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group mb-2">
+                <label asp-for="Item" class="control-label mb-2"></label>
+                <input asp-for="Item" class="form-control mb-4" />
+                <span asp-validation-for="Item" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success" /> |
+                <a href="@Url.Action("Index")" class="btn btn-danger">Voltar</a> 
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

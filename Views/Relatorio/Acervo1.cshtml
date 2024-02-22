@@ -1,0 +1,105 @@
+﻿@model IEnumerable<EPT.ViewModels.RelatorioAcervoViewModel>
+
+@{
+    ViewData["Title"] = "Acervo";
+}
+<div class="col-12">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+
+<br />
+
+<div class="alterar">
+    <h4>Filtros</h4>
+</div>
+<hr />
+<form method="get">
+
+    <div class="form-group col-4">
+        <label class="mb-2" style="font-size:17px;" for="itemSelect">Nome profissional:</label>
+        <select id="itemSelect" style="font-size:15px;" name="NomeId" class="form-control mb-2" asp-items="ViewBag.Profissionais">
+            <option value="0">Selecione...</option>
+        </select>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-3">
+            <label class="mb-2" style="font-size:17px;" for="itemSelect">Função:</label>
+            <select id="itemSelect" style="font-size:15px;" name="FuncaoId" class="form-control mb-2" asp-items="ViewBag.Funcoes">
+                <option value="0">Selecione...</option>
+            </select>
+
+        </div>
+
+        <div class="form-group col-3">
+            <label class="mb-2" style="font-size:17px;" for="itemSelect">ID Atestado:</label>
+            <select id="itemSelect" style="font-size:15px;" name="AtestadoId" class="form-control mb-2" asp-items="ViewBag.Atestado">
+                <option value="0">Selecione...</option>
+            </select>
+
+        </div>
+    </div>
+    <br />
+    <div>
+        <button class="btn btn-success" type="submit">Filtrar</button> 
+
+
+    </div>
+
+
+</form>
+<hr />
+
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr >
+            <th style="font-size:17px">
+                EPT nº
+            </th>
+            <th style="font-size:17px">
+               Acervo nº
+            </th>
+            <th style="font-size:17px">
+                Nome do funcionario
+            </th>
+            <th style="font-size:17px">
+                Função
+            </th>
+            <th style="font-size:17px">
+                Id Atestado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroEPT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroAcervo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtestadoId)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Detalhe", new {  idAtestado=item.AtestadoId, n_ept=item.NumeroEPT,n_acervo=item.NumeroAcervo,profissional=item.Nome, funcao=item.Funcao }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

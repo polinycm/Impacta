@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EPT</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EPT.styles.css" asp-append-version="true" />
+
+
+    <!-- Font Awesome JS -->
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+    
+    <div class="wrapper">
+        <nav id="sidebar" >
+            <div class="sidebar-header">
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.png" alt="logo da EPT"  class="logo">
+
+                </a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a asp-controller="Contratante" asp-action="Index">Contratante</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Funcoes" asp-action="Index" >Funções</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Itens" asp-action="Index">Itens</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Profissionais" asp-action="Index" >Profissional</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a asp-controller="Atestado" asp-action="Index">Atestado</a>
+                </li>
+                <li>
+                    <a asp-controller="Acervo" asp-action="Index">Acervo</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relatório</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a asp-action="Acervo1" asp-controller="Relatorio">Acervo</a>
+                        </li>
+                        <li>
+                            <a asp-action="Atestado2" asp-controller="Relatorio">Atestado</a>
+                        </li>
+                        <li>
+                            <a asp-action="Atestado1" asp-controller="Relatorio">Item e Quantidade</a>
+                        </li>
+                    </ul>
+                </li>
+                @if (User.IsInRole("Admin") == true)
+                {
+                    <li class="create-user" style="border-top:1px solid #cbcbcb">
+
+                        <a asp-action="Register" asp-controller="Account">Criar usuario</a>
+
+                    </li>
+                }
+
+                @if (User.IsInRole("Member") == true)
+                {
+
+                    <li class="create-user" style="border-top:1px solid #cbcbcb">
+
+                        <a asp-action="AlterarSenha" asp-controller="Account" style="font-weight: bold">Alterar senha</a>
+
+                    </li>
+                }
+                
+
+                <li class="logout">
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-left">
+                        <ul class="nav navbar-nav navbar-left">
+                            <button type="submit" style="width:auto" class="nav-link btn btn-link pb-0">
+                                <strong class="nav-link" style="color: #194AB8;font-weight:500;font-size:18px;"> Logout: @User.Identity.Name </strong>
+                            </button>
+                        </ul>
+
+                    </form>
+                </li>
+                
+                
+                
+            </ul>
+            
+            
+            
+        </nav>
+
+        <div id="conteudo" class="container-fluid">
+
+            
+            <div class="content">
+
+                <main role="main">
+                    @RenderBody()
+                </main>
+            </div>
+            
+        </div>
+     
+        
+    </div>
+    
+     
+    <footer class="footer text-muted">
+        <div class="container text-blue" >
+            &copy; 2023 - EPT - Todos os direitos reservados | EPT Engenharia e Pesquisas Tecnológicas SA
+        </div>
+    </footer>
+     
+    
+    
+    
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Faz com que o submenu abra -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+@*      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ *@    <!-- Popper.JS -->
+@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+ *@ 
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

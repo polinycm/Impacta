@@ -1,0 +1,145 @@
+﻿@model IEnumerable<EPT.ViewModels.RelatorioAcervoViewModel>
+
+@{
+    ViewData["Title"] = "Atestado1";
+}
+<div class="col-12">
+    <nav class="navbar navbar-expand-lg">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
+    </nav>
+</div>
+
+<br />
+<div class="alterar">
+    <h4>Filtros</h4>
+</div>
+<hr />
+
+<form method="get">
+    <div class="row mb-2" style="align-items:center">
+        <div class="form-group col-2 ">
+
+            <label class="control-label" style="font-size:17px;" for="">Quantidade entre:</label>
+            <div class="form-group ">
+                <input placeholder="quantidade minima" input class="form-control" style=" font-size:15px;" type="text" name="quantidadeMaior" id="quantidadeMaior">
+            </div>
+        </div>
+            
+        <div class="form-group col-2">
+            <label class="control-label" style="font-size:17px;" for=""></label>
+            
+            <input placeholder="quantidade maxima"  class="form-control mt-1" style=" font-size:15px;" type="text" name="quantidadeMenor" id="quantidadeMenor">
+
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-2" style="align-items:center">
+                
+        <div class="form-group col-5">
+            <label class="mb-2" for="itemSelect">Selecione um item:</label>
+
+            <select id="itemSelect" name="ItemId" class="form-control mb-2"  asp-items="ViewBag.Item">
+                <option value="0">Selecione...</option>
+            </select>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger" style="border:none; background:none; padding:0; color:red">@ViewBag.ErrorMessage</div>
+            }
+        </div>
+
+        <div class="form-group col-3 ">
+            @Html.Label("SubItensId","SubItens", new{@class="col-md-3 control-label"})
+            <div class="col-12">
+                @Html.DropDownList("SubItensId", new SelectList(""), new {@class="form-control", id = "SubItensId" })
+            </div>
+
+        </div>
+        <div class="checkbox-container col-2">
+            <label for="checkbox" class="checkbox-label">Sem subItem</label>
+            <div class="checkbox">
+                <input type="checkbox" id="checkbox" name="chk" value="1">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-5">
+        <label class="mb-2" for="itemSelect">Selecione uma unidade:</label>
+
+        <select id="itemSelect" name="unidade" class="form-control mb-2" asp-items="ViewBag.Unidade">
+            <option value="0">Selecione...</option>
+        </select>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger" style="border:none; background:none; padding:0; color:red">@ViewBag.ErrorMessage</div>
+        }
+    </div>
+
+    <br />
+    <div class="mb-3">
+        <button class="btn btn-success" type="submit">Filtrar</button> 
+    </div>
+</form>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="col-2" style="font-size:17px">
+                Id Atestado
+            </th>
+             <th class="col-2" style="font-size:17px">
+                Unidade
+            </th>
+            <th class="col-2" style="font-size:17px">
+                Quantidade
+            </th>
+           
+            <th class="col-4" style="font-size:17px">
+                Item
+            </th>
+            <th class="col-2" style="font-size:17px">
+                SubItem
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtestadoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantidade)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Item)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubItem)
+                </td>
+        </tr>
+}
+       
+    </tbody>
+    <tr>
+        <td colspan="2"><strong>Total Quantidade:</strong></td>
+        <td><strong>@Model.Sum(item => item.totalQtd)</strong></td>
+    </tr>
+</table>
+
+@section Scripts {
+
+    <script>
+        var url_listar_subitens = '@Url.Action("RecuperarSubItem","Atestado")';
+    </script>
+    @*         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+ *@
+}

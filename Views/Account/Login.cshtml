@@ -1,0 +1,54 @@
+﻿@model EPT.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+@Html.AntiForgeryToken()
+<html lang="pt">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/EPT.styles.css" asp-append-version="true" />
+    </head>
+<body class=background-container>
+    <div class="container col-12">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-12 p-4 " @*style="border: 2px solid #0D6EFD; border-radius: 10px;"*@>
+                <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                    <div class="logo">
+                        <img src="~/img/logo.png" class="img-fluid" asp-append-version="true" alt="logo" />
+                    </div>
+                    <form asp-controller="Account" asp-action="Login" method="post" class="col-3 form-horizontal" role="form">
+
+                        <div  asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="ReturnUrl" />
+                        <div class="form-group mb-2">
+                            <div >
+                                <input asp-for="UserName" class="form-control " asp-placeholder="Usuário" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group mb-2">
+                            <div >
+                                <input asp-for="Password" class="form-control " asp-placeholder="Senha" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2" style="align-content:flex-start">
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-success" value="Log in" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html>
+        
+

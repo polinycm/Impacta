@@ -1,0 +1,135 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<EPT.Models.Atestado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="get" class="row">
+    <div class="row buscar">
+        <div class="col-1">
+            <nav class="navbar navbar-expand-lg">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                </button>
+            </nav>
+        </div>
+       
+        <div class="col-7">
+            <input name="filter" class="form-control" placeholder="Buscar id atestado" value="@Model.RouteValue["Filter"]" />
+
+        </div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+
+</form>
+
+<br />
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="font-size:17px;">
+                ID
+              
+            </th>
+            <th style="font-size:17px;">
+                @Html.DisplayNameFor(model => model.objeto)
+            </th>
+            <th style="font-size:17px;">
+                Data inicio
+           </th>
+            <th style="font-size:17px;">
+                Data fim
+           </th>
+            <th style="font-size:17px;">
+                Valor
+            </th>
+            <th style="font-size:17px;">
+                Descrição
+            </th>
+             <th style="font-size:17px;">
+                Link
+             </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="font-size:15px;">
+                @Html.DisplayFor(modelItem => item.AtestadoId)
+            </td>
+            <td style="font-size:15px;">
+                <div class="max-width-200">
+                    @Html.DisplayFor(modelItem => item.objeto)
+                </div>
+            </td>
+            <td style="font-size:15px;">
+                    @{
+                        string formattedDateinicio = item.dt_inicio.ToString("dd/MM/yyyy");
+                    }
+                    @Html.DisplayFor(modelItem => formattedDateinicio)
+            </td>
+            <td style="font-size:15px;">
+                    @{
+                        string formattedDatefim = item.dt_fim.ToString("dd/MM/yyyy");
+                    }
+                    @Html.DisplayFor(modelItem => formattedDatefim)
+            </td>
+            <td style="font-size:15px;">
+                    @Html.DisplayFor(modelItem => item.moeda) @Html.DisplayFor(modelItem => item.valor)
+
+            </td>
+            <td style="font-size:15px;">
+                    <div class="max-width-200">
+                        @Html.DisplayFor(modelItem => item.descricao)
+                    </div>
+            </td>
+                <td style="font-size:15px;">
+                    <div class="max-width-200">
+
+                        <a href="@item.Link" target="_blank">@item.Link</a>
+                    </div>
+                </td>
+
+            <td class="p-0">
+                    <a href="@Url.Action("Alterar", new {  idatestado=item.AtestadoId  })" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </a> |
+                    <a href="@Url.Action("IncluirItem", new { idatestado=item.AtestadoId })" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </a> |
+                    <a href="@Url.Action("Excluir", new { idatestado=item.AtestadoId })" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                        </svg>
+                    </a>|
+                    <a href="@Url.Action("Incluir","Acervo", new { idatestado=item.AtestadoId })" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+                            <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z" />
+                            <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z" />
+                        </svg>
+                    </a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <vc:pager paging-list="@Model"></vc:pager>
+</div>
+
+
+<p>
+    <button class="btn btn-primary " onclick="location.href='@Url.Action("Incluir")'">+</button>
+</p>
