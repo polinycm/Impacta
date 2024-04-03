@@ -63,6 +63,8 @@ namespace EPT.Controllers
             return RedirectToAction("Index", "Contratante");
         }
 
+     /* requisito 2*/
+
         public IActionResult Excluir(string idcontratante)
         {
             var excluir = _contratanteRepository.ContratantePorId(idcontratante);
@@ -76,5 +78,6 @@ namespace EPT.Controllers
             _contratanteRepository.Excluir(contratanteId);
             return RedirectToAction("Index", "Contratante");
         }
+
     }
 }
