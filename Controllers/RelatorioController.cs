@@ -96,7 +96,38 @@ namespace EPT.Controllers
 
             return View(viewModel);
         }
+        public IActionResult Atestado1(int ItemId, string quantidadeMaior, string quantidadeMenor, int SubItensId, string unidade, int chk)
+        {
+            var acervos = _relatorioRepository.ItensQuantidade();
 
-        
+            List<Itens> itens = _itensRepository.Listar().ToList();
+            ViewBag.Item = new SelectList(itens, "ItensId", "Item");
+
+
+            List<AtestadoItem> unidades = _atestadoItemRepository.ListarUnidade().ToList();
+            ViewBag.Unidade = new SelectList(unidades, "unidade", "unidade");
+
+            if (ItemId != 0 || quantidadeMaior != null || quantidadeMenor != null || SubItensId != 0 || unidade != null)
+            {
+                acervos = _relatorioRepository.AtestadoFiltro1(ItemId, quantidadeMaior, quantidadeMenor, SubItensId, unidade, chk);
+
+            }
+
+            return View(acervos);
+        }
+
+        public IActionResult Atestado2(string objeto, DateTime dt_inicio, DateTime dt_fim, decimal valor, string descricao)
+        {
+            var acervos = _atestadoRepository.Listar();
+
+            if (objeto != null || valor != 0 || descricao != null || dt_inicio != new DateTime(1, 1, 1) || dt_fim != new DateTime(1, 1, 1))
+            {
+                acervos = _relatorioRepository.AtestadoFiltro2(objeto, dt_inicio, dt_fim, valor, descricao);
+
+            }
+
+            return View(acervos);
+        }
+
     }
 }
