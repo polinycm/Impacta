@@ -135,6 +135,37 @@ namespace EPT.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(LoginViewModel registroVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = registroVM.UserName };
+                var result = await _userManager.CreateAsync(user, registroVM.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Member");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("Registro", "Falha ao registrar o usuário");
+                }
+            }
+
+            return View(registroVM);
+        }
 
 
     }
